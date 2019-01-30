@@ -13,7 +13,7 @@ namespace WinFormsApp
         private string OriginalOutput;
         private bool SameOutputEverChecked;
 
-        private static readonly PanguService panguService = new PanguService();
+        private static readonly PanguService service = new PanguService();
 
         public FileForm()
         {
@@ -126,9 +126,9 @@ namespace WinFormsApp
             try
             {
                 if (Files != null) // 已选取转换文件
-                    panguService.DownLoadFiles(panguService.SpacingFiles(panguService.UploadFiles(Files), checkBox_override.Checked), Output);
+                    service.DownLoadFiles(service.SpacingFiles(service.UploadFiles(Files), checkBox_override.Checked), Output);
                 else if (Directory != null) // 已选取转换文件夹
-                    panguService.DownLoadFiles(panguService.SpacingFiles(panguService.UploadFolder(Directory), checkBox_override.Checked), Output);
+                    service.DownLoadFiles(service.SpacingFiles(service.UploadFolder(Directory), checkBox_override.Checked), Output);
                 else // 二者均未选择
                     throw new ArgumentNullException("转换文件和转换文件夹均未选择");
 
@@ -193,7 +193,7 @@ namespace WinFormsApp
 
         private void FileForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            panguService.ClearFiles();
+            service.ClearFiles();
             Application.Exit();
         }
     }

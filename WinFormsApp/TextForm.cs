@@ -5,7 +5,7 @@ namespace WinFormsApp
 {
     public partial class TextForm : Form
     {
-        private static readonly PanguService panguService = new PanguService();
+        private static readonly PanguService service = new PanguService();
 
         public TextForm()
         {
@@ -30,7 +30,7 @@ namespace WinFormsApp
             try
             {
                 var text_preconvert = textBox_Preconvert.Text;
-                var text_postconvert = panguService.SpacingText(text_preconvert);
+                var text_postconvert = service.SpacingText(text_preconvert);
                 textBox_Postconvert.Text = !text_postconvert.Contains(Environment.NewLine) ? text_postconvert.Replace("\n", Environment.NewLine) : text_postconvert; // 将 LF 替换为 CRLF
 
             }
@@ -42,7 +42,7 @@ namespace WinFormsApp
 
         private void TextForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            panguService.ClearFiles();
+            service.ClearFiles();
             Application.Exit();
         }
     }
